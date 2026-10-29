@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1d1b19;
+  --color-sub: #5b5751;
+  --color-mute: #8a857d;
+  --color-line: #e7e3dd;
+  --color-paper: #f7f5f2;
+  /* 強調の1色：落ち着いた赤みの色（YouTube の赤そのものは使わない） */
+  --color-accent: #a8423b;
+  --color-accent-dark: #86332d;
+  --color-accent-soft: #f6e9e6;
+  /* グラフ（dataviz の基準の配色。カテゴリーの順は固定） */
+  --color-s1: #2a78d6;
+  --color-s2: #eb6834;
+  --color-s3: #1baf7a;
+  --color-s1-soft: #9ec5f4;
+  --color-grid: #ebe8e3;
+  --color-neutral: #b3afa7;
+  /* 取れる／条件つき／取れない（色だけに頼らず、記号と文字を必ず添える） */
+  --color-ok: #0a7d0a;
+  --color-ok-soft: #e6f4e6;
+  --color-cond: #8a5a00;
+  --color-cond-mark: #fab219;
+  --color-cond-soft: #fff4d9;
+  --color-no: #6b6862;
+  --color-no-soft: #efedea;
+  --font-sans: var(--font-noto), "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  --shadow-card: 0 1px 2px rgb(28 24 20 / 0.04), 0 10px 28px -16px rgb(28 24 20 / 0.2);
+  --shadow-lift: 0 2px 4px rgb(28 24 20 / 0.06), 0 18px 40px -16px rgb(28 24 20 / 0.32);
+}
+
+:root {
+  color-scheme: light;
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "palt";
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-white shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-xl border border-line bg-white px-3.5 py-2 text-sm font-bold text-ink transition hover:bg-paper disabled:cursor-not-allowed disabled:opacity-45;
+  }
+  .seg {
+    @apply inline-flex rounded-xl border border-line bg-white p-0.5 text-[13px] font-bold;
+  }
+  .seg button {
+    @apply rounded-[10px] px-2.5 py-1 whitespace-nowrap text-sub transition hover:text-ink;
+  }
+  .seg button[aria-pressed="true"] {
+    @apply bg-ink text-white;
+  }
+  .eyebrow {
+    @apply text-[11px] font-bold tracking-[0.12em] text-mute;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .tbl {
+    @apply w-full border-collapse text-[13px];
+  }
+  .tbl th {
+    @apply border-b border-line px-2.5 py-2 text-left text-[12px] font-bold whitespace-nowrap text-sub;
+  }
+  .tbl td {
+    @apply border-b border-line px-2.5 py-2 align-middle;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.3s ease both;
+}
+/* recharts の線や棒に、フォーカスの枠が出ないように */
+.recharts-wrapper *:focus {
+  outline: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}

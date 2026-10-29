@@ -1,0 +1,17 @@
+# 案件の情報を含むため、GitHubに上げない
+DEMO_SPEC.md
+入札書の材料.md
+output/
+
+# ぱくたその写真（再配布禁止。Vercel CLIで公開する）
+public/photos/
+
+node_modules/
+.next/
+out/
+test-results/
+playwright-report/
+.vercel
+.env*
+*.tsbuildinfo
+next-env.d.ts
